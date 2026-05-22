@@ -51,3 +51,9 @@ variable "visibility_timeout_seconds" {
   default     = null
   type        = number
 }
+
+variable "source_queue_arns" {
+  description = "List of source queue ARNs allowed to use this queue as a dead letter queue. Creates an aws_sqs_queue_redrive_allow_policy when non-empty."
+  default     = []
+  type        = list(string)
+}
