@@ -12,3 +12,13 @@ resource "aws_sqs_queue" "queue" {
 
   tags = local.tags
 }
+
+resource "aws_sqs_queue_redrive_allow_policy" "this" {
+  count     = length(var.source_queue_arns) > 0 ? 1 : 0
+  queue_url = aws_sqs_queue.queue.id
+
+  redrive_allow_policy = jsonencode({
+    redrivePermission = "byQueue"
+    sourceQueueArns   = var.source_queue_arns
+  })
+}
