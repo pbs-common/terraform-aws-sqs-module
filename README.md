@@ -7,7 +7,7 @@
 Use this URL for the source of the module. See the usage examples below for more details.
 
 ```hcl
-github.com/pbs/terraform-aws-sqs-module?ref=1.0.1
+github.com/pbs/terraform-aws-sqs-module?ref=x.y.z
 ```
 
 ### Alternative Installation Methods
@@ -22,7 +22,7 @@ Integrate this module like so:
 
 ```hcl
 module "queue" {
-  source = "github.com/pbs/terraform-aws-sqs-module?ref=1.0.1"
+  source = "github.com/pbs/terraform-aws-sqs-module?ref=x.y.z"
 
   organization = var.organization
   environment  = var.environment
@@ -35,7 +35,7 @@ If you need to integrate a secondary queue as a dead letter queue, this would be
 
 ```hcl
 module "queue" {
-  source = "github.com/pbs/terraform-aws-sqs-module?ref=1.0.1"
+  source = "github.com/pbs/terraform-aws-sqs-module?ref=x.y.z"
 
   name = "my-queue"
 
@@ -51,7 +51,7 @@ module "queue" {
 }
 
 module "dlq" {
-  source = "github.com/pbs/terraform-aws-sqs-module?ref=1.0.1"
+  source = "github.com/pbs/terraform-aws-sqs-module?ref=x.y.z"
 
   name = "my-queue-dlq"
 
@@ -66,7 +66,7 @@ module "dlq" {
 
 If this repo is added as a subtree, then the version of the module should be close to the version shown here:
 
-`1.0.1`
+`x.y.z`
 
 Note, however that subtrees can be altered as desired within repositories.
 
@@ -89,7 +89,7 @@ Below is automatically generated documentation on this Terraform module using [t
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.35.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.45.0 |
 
 ## Modules
 
@@ -100,6 +100,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_sqs_queue.queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue) | resource |
+| [aws_sqs_queue_redrive_allow_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue_redrive_allow_policy) | resource |
 | [aws_default_tags.common_tags](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/default_tags) | data source |
 
 ## Inputs
@@ -117,6 +118,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | Name of the SQS Queue | `string` | `null` | no |
 | <a name="input_receive_wait_time_seconds"></a> [receive\_wait\_time\_seconds](#input\_receive\_wait\_time\_seconds) | The time for which a ReceiveMessage call will wait for a message to arrive (long polling) before returning. An integer from 0 to 20 (seconds). The default for this attribute is 0, meaning that the call will return immediately. | `number` | `null` | no |
 | <a name="input_redrive_policy"></a> [redrive\_policy](#input\_redrive\_policy) | The JSON policy to set up the Dead Letter Queue, see AWS docs. Note: when specifying maxReceiveCount, you must specify it as an integer (5), and not a string ("5"). | `string` | `null` | no |
+| <a name="input_source_queue_arns"></a> [source\_queue\_arns](#input\_source\_queue\_arns) | List of source queue ARNs allowed to use this queue as a dead letter queue. Creates an aws\_sqs\_queue\_redrive\_allow\_policy when non-empty. | `list(string)` | `[]` | no |
 | <a name="input_sqs_managed_sse_enabled"></a> [sqs\_managed\_sse\_enabled](#input\_sqs\_managed\_sse\_enabled) | Boolean to enable server-side encryption (SSE) of message content with SQS-owned encryption keys. See Encryption at rest. Terraform will only perform drift detection of its value when present in a configuration. | `bool` | `true` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Extra tags | `map(string)` | `{}` | no |
 | <a name="input_use_prefix"></a> [use\_prefix](#input\_use\_prefix) | Create queue with prefix instead of explicit name | `bool` | `true` | no |
